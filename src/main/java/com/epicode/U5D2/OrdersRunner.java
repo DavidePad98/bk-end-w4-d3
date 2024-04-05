@@ -36,5 +36,6 @@ public class OrdersRunner implements CommandLineRunner {
 		} finally {
 			ctx.close();
 		}
+
 	}
 }

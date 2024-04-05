@@ -41,18 +41,9 @@ class Esercizio30102023ApplicationTests {
 		assertEquals(expectedPrice, seatPrice);
 	}
 
-	@Test
-	public void testPrintMenu(){
-		try{
-			Menu menu = (Menu) ctx.getBean("menu");
-			menu.printMenu();
-		} finally {
-			ctx.close();
-		}
-	}
 
 	@Test
-	public void orderCreation(){
+	public void orderTest(){
 		try{
 			Table table = (Table) ctx.getBean("Tavolo1");
 			Order order = new Order(4, table);
@@ -70,7 +61,14 @@ class Esercizio30102023ApplicationTests {
 			order.addItem(lemonade);
 			order.addItem(wine);
 
-			order.print();
+			double expected = pizza1.getPrice() + pizza2.getPrice() + pizza3.getPrice() + lemonade.getPrice() * 2 + wine.getPrice() + table.getCostoCoperto() * 4;
+			double orderTot = order.getTotal();
+			System.out.println("totale aspettato: " + expected);
+			System.out.println("totale effettivo: " + orderTot);
+
+			assertEquals(expected, orderTot);
+
+//			order.print();
 		} finally {
 			ctx.close();
 		}
